@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Rose for Ema 🌹</title>
+  <!-- Love Light font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Love+Light&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #3b0a15, #120006);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .container {
+      text-align: center;
+      padding: 24px;
+      max-width: 900px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-family: 'Love Light', cursive;
+      font-size: clamp(3rem, 7vw, 4.5rem);
+      margin-bottom: 10px;
+      animation: fadeDown 1.5s ease;
+      font-weight: normal;
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px rgba(255, 182, 193, 0.5);
+    }
+
+    .subtitle {
+      font-family: 'Love Light', cursive;
+      font-size: 1.8rem;
+      opacity: 0.9;
+      margin-bottom: 25px;
+      animation: fadeDown 2s ease;
+      font-weight: normal;
+      letter-spacing: 1px;
+    }
+
+    .tap-hint {
+      margin-bottom: 24px;
+      font-size: 1.3rem;
+      padding: 12px 24px;
+      display: inline-block;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 0 20px rgba(255,77,109,0.35);
+      animation: pulse 2s infinite;
+      font-family: 'Love Light', cursive;
+      letter-spacing: 1px;
+    }
+
+    .photo-section {
+      margin: 40px auto;
+      max-width: 320px;
+      position: relative;
+      animation: fadeDown 2.5s ease;
+    }
+
+    .photo-frame {
+      width: 280px;
+      height: 280px;
+      margin: 0 auto;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 10px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 0 50px rgba(255, 77, 109, 0.5),
+        0 0 100px rgba(255, 77, 109, 0.3),
+        inset 0 0 30px rgba(255, 255, 255, 0.1);
+      position: relative;
+      background: #1a0a0f;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    .photo-frame:hover {
+      transform: scale(1.02);
+      box-shadow: 
+        0 0 60px rgba(255, 77, 109, 0.6),
+        0 0 120px rgba(255, 77, 109, 0.4),
+        inset 0 0 40px rgba(255, 255, 255, 0.15);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .photo-frame:hover img {
+      transform: scale(1.08);
+    }
+
+    .photo-caption {
+      margin-top: 20px;
+      font-size: 1.8rem;
+      font-family: 'Love Light', cursive;
+      color: rgba(255, 255, 255, 0.95);
+      letter-spacing: 2px;
+    }
+
+    .rose-wrapper {
+      position: relative;
+      width: 250px;
+      height: 350px;
+      margin: 40px auto;
+      cursor: pointer;
+      touch-action: manipulation;
+      animation: fadeDown 1.8s ease;
+    }
+
+    .rose {
+      position: absolute;
+      width: 140px;
+      height: 180px;
+      top: 50px;
+      left: 55px;
+    }
+
+    .petal {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, #ff4d6d, #b11226);
+      border-radius: 60% 60% 60% 60%;
+      transform-origin: bottom center;
+      box-shadow: 0 0 40px rgba(255, 77, 109, 0.6);
+      animation: bloom 6s infinite ease-in-out;
+    }
+
+    .petal:nth-child(1) { animation-delay: 0s; }
+    .petal:nth-child(2) { transform: rotate(40deg); animation-delay: 0.4s; }
+    .petal:nth-child(3) { transform: rotate(-40deg); animation-delay: 0.8s; }
+    .petal:nth-child(4) { transform: rotate(80deg); animation-delay: 1.2s; }
+    .petal:nth-child(5) { transform: rotate(-80deg); animation-delay: 1.6s; }
+
+    .stem {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 8px;
+      height: 160px;
+      background: linear-gradient(to bottom, #3a7d44, #1b5e20);
+      transform: translateX(-50%);
+      border-radius: 4px;
+      z-index: 1;
+    }
+
+    .leaf {
+      position: absolute;
+      width: 70px;
+      height: 35px;
+      background: linear-gradient(to right, #4caf50, #1b5e20);
+      border-radius: 50% 50% 50% 0;
+      top: 200px;
+      left: calc(50% + 8px);
+      transform: rotate(-25deg);
+      z-index: 2;
+    }
+
+    .message {
+      max-width: 750px;
+      margin: 40px auto;
+      font-family: 'Love Light', cursive;
+      font-size: clamp(1.8rem, 4vw, 2.2rem);
+      line-height: 1.8;
+      letter-spacing: 1px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 1.4s ease;
+      min-height: 300px;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .bangla {
+      margin-top: 30px;
+      font-size: 1.8rem;
+      opacity: 0.9;
+      font-family: 'Poppins', sans-serif;
+      font-style: italic;
+    }
+
+    .closing {
+      margin-top: 40px;
+      font-size: 2.2rem;
+      font-family: 'Love Light', cursive;
+      opacity: 0;
+      letter-spacing: 2px;
+    }
+
+    .hidden-line {
+      margin-top: 25px;
+      font-size: 1.8rem;
+      opacity: 0;
+      transition: opacity 2s ease;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      font-family: 'Love Light', cursive;
+      letter-spacing: 1px;
+    }
+
+    .hidden-line.show {
+      opacity: 0.9;
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 1.2rem;
+      opacity: 0.6;
+      padding: 15px;
+      font-family: 'Love Light', cursive;
+      letter-spacing: 1px;
+    }
+
+    .particle {
+      position: fixed;
+      top: -10px;
+      font-size: 20px;
+      opacity: 0.8;
+      animation: fall linear forwards;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .music-controls {
+      position: fixed;
+      top: 25px;
+      right: 25px;
+      z-index: 100;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .music-controls:hover {
+      opacity: 1;
+    }
+
+    .music-btn {
+      background: rgba(255, 77, 109, 0.25);
+      border: 2px solid rgba(255, 77, 109, 0.6);
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      font-family: 'Love Light', cursive;
+    }
+
+    .music-btn:hover {
+      background: rgba(255, 77, 109, 0.35);
+      transform: scale(1.15);
+      box-shadow: 0 0 25px rgba(255, 77, 109, 0.4);
+    }
+
+    @keyframes fall {
+      to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes bloom {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes glowIn {
+      from { opacity: 0; text-shadow: none; }
+      to { opacity: 1; text-shadow: 0 0 30px rgba(255, 182, 193, 0.9); }
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        margin-top: 30px;
+      }
+      
+      .photo-frame {
+        width: 220px;
+        height: 220px;
+      }
+      
+      .rose-wrapper {
+        width: 220px;
+        height: 320px;
+      }
+      
+      .rose {
+        width: 120px;
+        height: 160px;
+        left: 50px;
+        top: 40px;
+      }
+      
+      .message {
+        padding: 25px;
+        font-size: 1.6rem;
+      }
+      
+      .tap-hint {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+      }
+      
+      .music-controls {
+        top: 15px;
+        right: 15px;
+      }
+      
+      .music-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+      }
+      
+      h1 {
+        font-size: 2.8rem;
+      }
+      
+      .subtitle {
+        font-size: 1.5rem;
+      }
+      
+      .photo-caption {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .rose-wrapper {
+        width: 200px;
+        height: 300px;
+      }
+      
+      .rose {
+        width: 110px;
+        height: 150px;
+        left: 45px;
+        top: 35px;
+      }
+      
+      .photo-frame {
+        width: 200px;
+        height: 200px;
+      }
+      
+      h1 {
+        font-size: 2.4rem;
+      }
+      
+      .subtitle {
+        font-size: 1.3rem;
+      }
+      
+      .message {
+        font-size: 1.4rem;
+        padding: 20px;
+      }
+      
+      .photo-caption {
+        font-size: 1.3rem;
+      }
+    }
+
+    /* GitHub Pages compatibility fixes */
+    .no-js-message {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #3b0a15;
+      color: white;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="bgm" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8c8a734e4.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="music-controls">
+    <button class="music-btn" id="musicToggle">🎵</button>
+  </div>
+
+  <div class="container">
+    <h1>Happy Rose Day, Ema 🌹</h1>
+    <div class="subtitle">I couldn't give you a rose in person… so I made one for you.</div>
+
+    <div class="photo-section">
+      <div class="photo-frame">
+        <!-- Try both paths for GitHub Pages compatibility -->
+        <img src="ema.jpg" alt="Ema" 
+             onerror="this.onerror=null; this.src='./ema.jpg'; this.alt='Ema'">
+      </div>
+      <div class="photo-caption">For the most beautiful Ema 🌹</div>
+    </div>
+
+    <div class="tap-hint">Tap the rose below 🌹</div>
+
+    <div class="rose-wrapper" id="rose">
+      <div class="rose">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+      </div>
+      <div class="stem"></div>
+      <div class="leaf"></div>
+    </div>
+
+    <div class="message" id="message">
+      <p>
+        Ema,<br><br>
+        If I could, I would hand you a real rose and watch you smile.
+        Since distance won today, I'm sending you this instead — a small piece of my heart,
+        blooming quietly just for you.
+        <br><br>
+        This rose doesn't wilt, doesn't fade,
+        and carries everything I couldn't say in person.
+        Whenever you open this page, know that somewhere,
+        someone is thinking of you — softly, warmly, always.
+      </p>
+
+      <div class="bangla">
+        তুমি দূরে থাকলেও, আমার ভালোবাসা সবসময় তোমার কাছেই থাকে 🤍
+      </div>
+
+      <div class="closing" id="closing">For Ema, always 🌹</div>
+
+      <div class="hidden-line" id="hiddenLine">
+        This will always be yours — no matter the distance.
+      </div>
+    </div>
+
+    <footer>
+      Made with love by Khalid
+    </footer>
+  </div>
+
+  <script>
+    // First, fix GitHub Pages path issues
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    
+    // Fix for GitHub Pages file paths
+    if (isGitHubPages) {
+      console.log('Running on GitHub Pages');
+      // Check if ema.jpg exists, try different paths
+      const img = document.querySelector('.photo-frame img');
+      const originalSrc = img.src;
+      img.src = originalSrc.replace('ema.jpg', './ema.jpg');
+      
+      // Also try absolute path from repo root
+      setTimeout(() => {
+        if (img.complete && img.naturalHeight === 0) {
+          // Image failed to load, try absolute path
+          const repoPath = window.location.pathname.split('/').slice(0, 3).join('/');
+          img.src = repoPath + '/ema.jpg';
+        }
+      }, 1000);
+    }
+
+    const rose = document.getElementById('rose');
+    const message = document.getElementById('message');
+    const music = document.getElementById('bgm');
+    const musicToggle = document.getElementById('musicToggle');
+    const hiddenLine = document.getElementById('hiddenLine');
+    const closing = document.getElementById('closing');
+    let opened = false;
+    let isPlaying = false;
+
+    // Fix music autoplay issue
+    document.addEventListener('click', initMusic, { once: true });
+    document.addEventListener('touchstart', initMusic, { once: true });
+
+    function initMusic() {
+      // Set volume and prepare music
+      music.volume = 0.5;
+      music.preload = 'auto';
+      
+      // Try to play music
+      const playPromise = music.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            isPlaying = true;
+            musicToggle.innerHTML = '🎵';
+          })
+          .catch(error => {
+            console.log("Autoplay prevented, user will need to click play button");
+            musicToggle.innerHTML = '▶️';
+          });
+      }
+    }
+
+    // Music toggle button
+    musicToggle.addEventListener('click', () => {
+      if (isPlaying) {
+        music.pause();
+        musicToggle.innerHTML = '▶️';
+      } else {
+        music.play().then(() => {
+          musicToggle.innerHTML = '🎵';
+        }).catch(error => {
+          console.log("Playback failed:", error);
+          // Show user-friendly message
+          const playMessage = document.createElement('div');
+          playMessage.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 10000;
+            font-family: 'Poppins', sans-serif;
+          `;
+          playMessage.innerHTML = 'Please tap the rose first to enable audio, then try the music button again.';
+          document.body.appendChild(playMessage);
+          setTimeout(() => playMessage.remove(), 3000);
+        });
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // Add event listeners for both click and touch on rose
+    rose.addEventListener('click', handleRoseClick);
+    rose.addEventListener('touchstart', handleRoseClick, { passive: true });
+
+    function handleRoseClick() {
+      if (!opened) {
+        message.classList.add('show');
+        
+        // Start music if not already playing
+        if (!isPlaying) {
+          music.play().then(() => {
+            isPlaying = true;
+            musicToggle.innerHTML = '🎵';
+          }).catch(error => {
+            console.log("Music playback failed:", error);
+          });
+        }
+
+        // Soft vibration (mobile only)
+        if (navigator.vibrate) {
+          navigator.vibrate([30, 20, 30]);
+        }
+
+        // Reveal closing text after 1.5 seconds
+        setTimeout(() => {
+          closing.style.animation = 'glowIn 3s ease forwards';
+        }, 1500);
+
+        // Reveal hidden line after 5–6 seconds
+        setTimeout(() => {
+          hiddenLine.classList.add('show');
+        }, 5500);
+
+        opened = true;
+        
+        // Remove tap hint after interaction
+        const tapHint = document.querySelector('.tap-hint');
+        tapHint.style.opacity = '0.5';
+        tapHint.style.animation = 'none';
+      }
+    }
+
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.innerText = Math.random() > 0.5 ? '🌸' : '🤍';
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDuration = 6 + Math.random() * 4 + 's';
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 10000);
+    }
+
+    // Start particle animation
+    setInterval(createParticle, 700);
+
+    // Ensure page is properly scrolled on load
+    window.addEventListener('load', () => {
+      window.scrollTo(0, 0);
+      
+      // Add a small delay for animations
+      setTimeout(() => {
+        document.body.style.overflowY = 'auto';
+      }, 500);
+      
+      // Fix for GitHub Pages routing
+      if (isGitHubPages && window.location.pathname.includes('/blob/')) {
+        // Redirect to GitHub Pages URL if viewing raw file
+        const currentPath = window.location.pathname;
+        if (currentPath.includes('/blob/main/') || currentPath.includes('/blob/master/')) {
+          const pagePath = currentPath.replace('/blob/', '/').replace(/\/[^\/]+\.html$/, '/');
+          if (pagePath !== currentPath) {
+            console.log('Redirecting to GitHub Pages URL');
+          }
+        }
+      }
+    });
+
+    // Fallback for missing photo
+    window.addEventListener('error', function(e) {
+      if (e.target.tagName.toLowerCase() === 'img') {
+        console.log('Image failed to load:', e.target.src);
+        // Try one more fallback
+        if (e.target.src.includes('ema.jpg')) {
+          e.target.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face';
+          e.target.alt = 'Placeholder image of a beautiful person';
+        }
+      }
+    }, true);
+
+    // GitHub Pages specific fixes
+    if (isGitHubPages) {
+      // Ensure all relative paths work
+      const base = document.createElement('base');
+      base.href = window.location.origin + window.location.pathname.split('/').slice(0, -1).join('/') + '/';
+      document.head.appendChild(base);
+    }
+  </script>
+</body>
+</html>
