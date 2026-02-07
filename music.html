@@ -56,13 +56,54 @@
       animation: pulse 2s infinite;
     }
 
+    .photo-section {
+      margin: 30px auto;
+      max-width: 300px;
+      position: relative;
+      animation: fadeDown 2.5s ease;
+    }
+
+    .photo-frame {
+      width: 250px;
+      height: 250px;
+      margin: 0 auto;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 8px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 
+        0 0 40px rgba(255, 77, 109, 0.4),
+        0 0 80px rgba(255, 77, 109, 0.2);
+      position: relative;
+      background: #1a0a0f;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-frame:hover img {
+      transform: scale(1.05);
+    }
+
+    .photo-caption {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      font-family: 'Playfair Display', serif;
+      color: rgba(255, 255, 255, 0.9);
+      font-style: italic;
+    }
+
     .rose-wrapper {
       position: relative;
       width: 220px;
       height: 300px;
-      margin: 0 auto 30px;
+      margin: 30px auto;
       cursor: pointer;
       touch-action: manipulation;
+      animation: fadeDown 1.8s ease;
     }
 
     .rose {
@@ -116,7 +157,7 @@
 
     .message {
       max-width: 720px;
-      margin: 0 auto;
+      margin: 30px auto;
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.1rem, 3vw, 1.5rem);
       line-height: 1.7;
@@ -124,10 +165,11 @@
       transform: translateY(10px);
       transition: all 1.4s ease;
       min-height: 300px;
-      padding: 20px;
+      padding: 25px;
       background: rgba(0, 0, 0, 0.2);
-      border-radius: 10px;
-      margin-top: 20px;
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .message.show {
@@ -179,6 +221,40 @@
       z-index: 9999;
     }
 
+    .music-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .music-controls:hover {
+      opacity: 1;
+    }
+
+    .music-btn {
+      background: rgba(255, 77, 109, 0.2);
+      border: 2px solid rgba(255, 77, 109, 0.5);
+      color: white;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+
+    .music-btn:hover {
+      background: rgba(255, 77, 109, 0.3);
+      transform: scale(1.1);
+    }
+
     @keyframes fall {
       to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
@@ -215,6 +291,11 @@
         margin-top: 20px;
       }
       
+      .photo-frame {
+        width: 200px;
+        height: 200px;
+      }
+      
       .rose-wrapper {
         width: 200px;
         height: 280px;
@@ -236,6 +317,17 @@
         font-size: 0.95rem;
         padding: 8px 16px;
       }
+      
+      .music-controls {
+        top: 10px;
+        right: 10px;
+      }
+      
+      .music-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -251,6 +343,11 @@
         top: 25px;
       }
       
+      .photo-frame {
+        width: 180px;
+        height: 180px;
+      }
+      
       h1 {
         font-size: 1.8rem;
       }
@@ -264,14 +361,26 @@
 <body>
 
   <audio id="bgm" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a734e4.mp3?filename=romantic-piano-112191.mp3" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8c8a734e4.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
   </audio>
+
+  <div class="music-controls">
+    <button class="music-btn" id="musicToggle">🎵</button>
+  </div>
 
   <div class="container">
     <h1>Happy Rose Day, Ema 🌹</h1>
     <div class="subtitle">I couldn't give you a rose in person… so I made one for you.</div>
 
-    <div class="tap-hint">Tap the rose 🌹</div>
+    <div class="photo-section">
+      <div class="photo-frame">
+        <img src="ema.jpg" alt="Ema" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face'; this.alt='Placeholder image'">
+      </div>
+      <div class="photo-caption">For the most beautiful girl, Ema 🌹</div>
+    </div>
+
+    <div class="tap-hint">Tap the rose below 🌹</div>
 
     <div class="rose-wrapper" id="rose">
       <div class="rose">
@@ -305,12 +414,12 @@
       <div class="closing" id="closing">For Ema, always 🌹</div>
 
       <div class="hidden-line" id="hiddenLine">
-        This will always be yours — no matter the distance.
+        My everlasting love will always be yours, no matter the distance.
       </div>
     </div>
 
     <footer>
-      Made with love by Khalid
+      Made with love by Khalid 🦆
     </footer>
   </div>
 
@@ -318,11 +427,53 @@
     const rose = document.getElementById('rose');
     const message = document.getElementById('message');
     const music = document.getElementById('bgm');
+    const musicToggle = document.getElementById('musicToggle');
     const hiddenLine = document.getElementById('hiddenLine');
     const closing = document.getElementById('closing');
     let opened = false;
+    let isPlaying = false;
 
-    // Add event listeners for both click and touch
+    // Fix music autoplay issue
+    document.addEventListener('click', initMusic, { once: true });
+    document.addEventListener('touchstart', initMusic, { once: true });
+
+    function initMusic() {
+      // Set volume and prepare music
+      music.volume = 0.5;
+      music.preload = 'auto';
+      
+      // Try to play music
+      const playPromise = music.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            isPlaying = true;
+            musicToggle.innerHTML = '🎵';
+          })
+          .catch(error => {
+            console.log("Autoplay prevented, user will need to click play button");
+            musicToggle.innerHTML = '▶️';
+          });
+      }
+    }
+
+    // Music toggle button
+    musicToggle.addEventListener('click', () => {
+      if (isPlaying) {
+        music.pause();
+        musicToggle.innerHTML = '▶️';
+      } else {
+        music.play().then(() => {
+          musicToggle.innerHTML = '🎵';
+        }).catch(error => {
+          console.log("Playback failed:", error);
+          alert("Please interact with the page first to enable audio");
+        });
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // Add event listeners for both click and touch on rose
     rose.addEventListener('click', handleRoseClick);
     rose.addEventListener('touchstart', handleRoseClick, { passive: true });
 
@@ -330,11 +481,15 @@
       if (!opened) {
         message.classList.add('show');
         
-        // Play music with user interaction
-        music.volume = 0.5;
-        music.play().catch(e => {
-          console.log("Autoplay prevented, user interaction required");
-        });
+        // Start music if not already playing
+        if (!isPlaying) {
+          music.play().then(() => {
+            isPlaying = true;
+            musicToggle.innerHTML = '🎵';
+          }).catch(error => {
+            console.log("Music playback failed:", error);
+          });
+        }
 
         // Soft vibration (mobile only)
         if (navigator.vibrate) {
@@ -382,6 +537,13 @@
         document.body.style.overflowY = 'auto';
       }, 500);
     });
+
+    // Fallback for missing photo
+    window.addEventListener('error', function(e) {
+      if (e.target.tagName.toLowerCase() === 'img') {
+        console.log('Image failed to load:', e.target.src);
+      }
+    }, true);
   </script>
 </body>
 </html>
