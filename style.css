@@ -366,6 +366,9 @@ footer {
     left: 35px;
     top: 25px;
   }
+  .leaf{
+    top: 200px;
+  }
   
   .photo-frame {
     width: 180px;
