@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Rose for Ema 🌹</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #3b0a15, #120006);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 24px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      margin-bottom: 12px;
+      animation: fadeDown 1.5s ease;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-bottom: 32px;
+      animation: fadeDown 2s ease;
+    }
+
+    .rose-wrapper {
+      position: relative;
+      width: 220px;
+      height: 300px;
+      margin: 0 auto 32px;
+      cursor: pointer;
+    }
+
+    .petal {
+      position: absolute;
+      width: 120px;
+      height: 160px;
+      background: linear-gradient(145deg, #ff4d6d, #b11226);
+      border-radius: 60% 60% 60% 60%;
+      top: 40px;
+      left: 50px;
+      transform-origin: bottom center;
+      box-shadow: 0 0 30px rgba(255, 77, 109, 0.4);
+      animation: bloom 6s infinite ease-in-out;
+    }
+
+    .petal:nth-child(2) { transform: rotate(40deg); animation-delay: 0.5s; }
+    .petal:nth-child(3) { transform: rotate(-40deg); animation-delay: 1s; }
+    .petal:nth-child(4) { transform: rotate(80deg); animation-delay: 1.5s; }
+    .petal:nth-child(5) { transform: rotate(-80deg); animation-delay: 2s; }
+
+    .stem {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 6px;
+      height: 140px;
+      background: linear-gradient(to bottom, #3a7d44, #1b5e20);
+      transform: translateX(-50%);
+      border-radius: 3px;
+    }
+
+    .leaf {
+      position: absolute;
+      width: 60px;
+      height: 30px;
+      background: linear-gradient(to right, #4caf50, #1b5e20);
+      border-radius: 50% 50% 50% 0;
+      top: 180px;
+      left: calc(50% + 6px);
+      transform: rotate(-25deg);
+    }
+
+    .message {
+      max-width: 700px;
+      margin: 0 auto;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      line-height: 1.6;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    .message.show { opacity: 1; }
+
+    .hint {
+      margin-top: 14px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
+
+    @keyframes bloom {
+      0%, 100% { transform: scale(1) rotate(var(--r, 0deg)); }
+      50% { transform: scale(1.08) rotate(var(--r, 0deg)); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .rose-wrapper { transform: scale(0.9); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Happy Rose Day, Ema 🌹</h1>
+    <div class="subtitle">I couldn’t give you a rose in person… so I made one for you.</div>
+
+    <div class="rose-wrapper" id="rose">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="stem"></div>
+      <div class="leaf"></div>
+    </div>
+
+    <div class="message" id="message">
+      <p>
+        Ema,<br><br>
+        If I could, I would hand you a real rose and watch you smile.
+        Since distance won today, I’m sending you this instead — a small piece of my heart,
+        blooming quietly just for you.
+        <br><br>
+        This rose doesn’t wilt, doesn’t fade,
+        and carries everything I couldn’t say in person.
+        Whenever you open this page, know that somewhere,
+        someone is thinking of you — softly, warmly, always.
+        <br><br>
+        Happy Rose Day 🤍
+      </p>
+    </div>
+
+    <div class="hint">Tap the rose 🌹</div>
+
+    <footer>
+      Made with love by Khalid
+    </footer>
+  </div>
+
+  <script>
+    const rose = document.getElementById('rose');
+    const message = document.getElementById('message');
+    let opened = false;
+
+    rose.addEventListener('click', () => {
+      if (!opened) {
+        message.classList.add('show');
+        opened = true;
+      }
+    });
+  </script>
+</body>
+</html>
